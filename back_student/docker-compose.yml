@@ -1,7 +1,8 @@
 version: '3'
 services:
-  db: # the service hosting your MySQL instance
-    image: mysql:5.7 # the image and tag docker will pull from docker hub
+  db:
+    image: mysql:8.0 # the image and tag docker will pull from docker hub
+    command: --default-authentication-plugin=mysql_native_password
     container_name: dev_db
     volumes: # this section allows you to configure persistence within multiple restarts
       - db_data:/var/lib/mysql
