@@ -31,7 +31,12 @@ createConnection()
 
     // Call midlewares
     const app = express();
-    app.use(cors());
+    app.use(
+      cors({
+        origin: process.env.CORS_ORIGIN,
+        credentials: true,
+      }),
+    );
     app.use(swaggerStats.getMiddleware({}));
     app.use(helmet());
     app.use(bodyParser.json());
@@ -52,4 +57,4 @@ createConnection()
       console.log('Server started on port 3000!');
     });
   })
-  .catch(e => console.log(e));
+  .catch((e) => console.log(e));
