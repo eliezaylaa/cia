@@ -8,10 +8,8 @@ services:
       - db_data:/var/lib/mysql
     restart: always # if the db crash somehow, restart it
     environment: # env variables, you usually set this to override existing ones
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: dev_db
-      # MYSQL_USER: root
-      # MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     ports:
       - '3306:3306'
     networks:
@@ -24,6 +22,14 @@ services:
     restart: always
     environment:
       DB_HOST: db
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      DB_TYPE: ${DB_TYPE}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     ports:
       - '3000:3000'
     networks:
