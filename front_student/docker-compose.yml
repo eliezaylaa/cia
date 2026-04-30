@@ -1,11 +1,10 @@
 version: "3"
-
 services:
   front:
-    build: .
+    build:
+      context: .
+      args:
+        REACT_APP_API_URL: ${REACT_APP_API_URL}
     ports:
       - 8080:80
-    environment:
-      REACT_APP_API_URL: "localhost:3000"
-    #      PUBLIC_URL: "localhost:8080"
     restart: always
