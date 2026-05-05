@@ -35,7 +35,7 @@ services:
     build: .
     restart: always
     environment:
-      DB_HOST: db
+      DB_HOST: ${DB_HOST}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USERNAME: ${DB_USERNAME}
       DB_NAME: ${DB_NAME}
