@@ -1,4 +1,5 @@
 FROM mhart/alpine-node:11 AS builder
+RUN addgroup -S service-web && adduser -S service-web -G service-web
 WORKDIR /app
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
