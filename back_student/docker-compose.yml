@@ -10,6 +10,9 @@ services:
     environment: # env variables, you usually set this to override existing ones
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_USERPASSWORD}
+      
     ports:
       - '3306:3306'
     networks:
@@ -36,7 +39,7 @@ services:
     restart: always
     environment:
       DB_HOST: ${DB_HOST}
-      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERPASSWORD: ${DB_USERPASSWORD}
       DB_USERNAME: ${DB_USERNAME}
       DB_NAME: ${DB_NAME}
       DB_PORT: ${DB_PORT}
@@ -44,6 +47,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_USERNAME: ${ADMIN_USERNAME}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      CORS_ORIGIN: ${CORS_ORIGIN}
+      ADMIN_ROLE: ${ADMIN_ROLE}
     ports:
       - '3000:3000'
     networks:
