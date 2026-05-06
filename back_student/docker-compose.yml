@@ -1,4 +1,3 @@
-version: '3'
 services:
   db: # the service hosting your MySQL instance
     image: mysql:8.0 # the image and tag docker will pull from docker hub
