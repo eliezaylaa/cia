@@ -61,7 +61,7 @@ createConnection()
     app.use('/', routes);
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
     app.listen(process.env.API_PORT || 3000, async () => {
-      console.log('Server started on port 3000!');
+      console.log(`Server started on port ${process.env.API_PORT || 3000}!`);
     });
   })
   .catch((e) => console.log(e));
