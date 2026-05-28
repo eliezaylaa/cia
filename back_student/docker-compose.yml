@@ -11,9 +11,7 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_USERPASSWORD}
-      
-    ports:
-      - '3306:3306'
+
     networks:
       - backend
     healthcheck:
