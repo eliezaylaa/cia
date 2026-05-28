@@ -1,6 +1,6 @@
-import  {compareSync, hashSync} from 'bcryptjs';
+import {compareSync, hashSync} from 'bcryptjs';
 import {IsNotEmpty, Length} from 'class-validator';
-import { Exclude } from 'class-transformer';
+import {Exclude} from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -13,7 +13,6 @@ import {
 @Entity()
 @Unique(['username'])
 export class User {
-
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -39,7 +38,7 @@ export class User {
   public updatedAt: Date;
 
   public hashPassword() {
-    this.password = hashSync(this.password, 8);
+    this.password = hashSync(this.password, 10);
   }
 
   public checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
