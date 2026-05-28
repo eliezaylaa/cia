@@ -9,6 +9,7 @@ import * as swaggerStats from 'swagger-stats';
 import * as swaggerUi from 'swagger-ui-express';
 import {createConnection} from 'typeorm';
 import routes from './routes';
+import * as rateLimit from 'express-rate-limit';
 
 const options = {
   swaggerDefinition: {
@@ -31,6 +32,12 @@ createConnection()
 
     // Call midlewares
     const app = express();
+    const loginLimiter = rateLimit({
+      windowMs: 15 * 60 * 1000,
+      max: 10,
+      message: 'Too many login attempts, please try again after 15 minutes',
+    });
+    app.use('/auth/login', loginLimiter);
     app.use(
       cors({
         origin: process.env.CORS_ORIGIN,
@@ -53,7 +60,7 @@ createConnection()
     // Set all routes from routes folder
     app.use('/', routes);
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-    app.listen(3000, async () => {
+    app.listen(process.env.API_PORT || 3000, async () => {
       console.log('Server started on port 3000!');
     });
   })
