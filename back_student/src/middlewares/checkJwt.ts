@@ -3,34 +3,35 @@ import * as jwt from 'jsonwebtoken';
 import config from '../config/config';
 
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
-  // Get the jwt token from the head
-
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  const legacyAuth = req.headers.auth as string;
+
+  let token: string;
+
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.split(' ')[1];
+  } else if (legacyAuth) {
+    token = legacyAuth;
+  } else {
     res.status(400).send('No token provided');
     return;
   }
-  const token = authHeader.split(' ')[1];
+
   let jwtPayload;
 
-  // Try to validate the token and get data
   try {
     jwtPayload = jwt.verify(token, config.jwtSecret) as any;
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
-    // If token is not valid, respond with 401 (unauthorized)
     res.status(401).send("You don't have the rights");
     return;
   }
 
-  // The token is valid for 1 hour
-  // We want to send a new token on every request
   const {userId, username} = jwtPayload;
   const newToken = jwt.sign({userId, username}, config.jwtSecret, {
     expiresIn: '1h',
   });
   res.setHeader('token', newToken);
 
-  // Call the next middleware or controller
   next();
 };
