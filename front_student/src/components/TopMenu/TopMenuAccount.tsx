@@ -10,6 +10,7 @@ function TopMenuAccount(): JSX.Element {
   const email: string = useSelector((state: IStateType) => state.account.email);
   const [isShow, setShow] = useState(false);
   const session = useSession();
+  const history = useHistory();
 
   return (
     <li className="nav-item dropdown no-arrow">
