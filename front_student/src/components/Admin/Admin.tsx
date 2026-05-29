@@ -5,10 +5,11 @@ import { Switch } from "react-router";
 import Users from "../Users/Users";
 import Home from "../Home/Home";
 import Notifications from "../../common/components/Notification";
-import {PrivateRoute} from "../../common/components/PrivateRoute";
+import { PrivateRoute } from "../../common/components/PrivateRoute";
+import Products from "../Products/Products";
+import Orders from "../Orders/Orders";
 
 const Admin: React.FC = () => {
-
   return (
     <Fragment>
       <Notifications />
@@ -18,8 +19,18 @@ const Admin: React.FC = () => {
           <TopMenu />
           <div className="container-fluid">
             <Switch>
-              <PrivateRoute exact path="/users"><Users /></PrivateRoute>
-              <PrivateRoute exact path="/"><Home /></PrivateRoute>
+              <PrivateRoute exact path="/users">
+                <Users />
+              </PrivateRoute>
+              <PrivateRoute exact path="/products">
+                <Products />
+              </PrivateRoute>
+              <PrivateRoute exact path="/orders">
+                <Orders />
+              </PrivateRoute>
+              <PrivateRoute exact path="/">
+                <Home />
+              </PrivateRoute>
             </Switch>
           </div>
         </div>
