@@ -47,7 +47,7 @@ createConnection()
     app.use(swaggerStats.getMiddleware({}));
     app.use(
       helmet({
-        contentSecurityPolicy: true,
+        contentSecurityPolicy: false,
         crossOriginEmbedderPolicy: true,
         crossOriginOpenerPolicy: true,
         crossOriginResourcePolicy: true,
